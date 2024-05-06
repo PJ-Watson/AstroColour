@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61.0","oldest-supported-numpy", "setuptools_scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "AstroColour"
+dynamic = ["version"]
+authors = [
+  { name="Peter Watson", email="peter.watson+AC@inaf.it" },
+]
+description = "A flexible tool to create colour images from multi-channel astronomical data."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Astronomy",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "astropy>=5.3",
+    "numpy>=1.24",
+    "matplotlib>=3.6",
+    "tqdm>=4.66",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/PJ-Watson/AstroColour"
+"Bug Tracker" = "https://github.com/PJ-Watson/AstroColour/issues"
+
+[tool.setuptools.package-data]
+"*" = ["*.*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py311']
+extend-exclude = '(.*.txt|.*.md|.*.toml|.*.odg)'
+preview = true
+
+[tool.isort]
+profile = "black"
+
+[tool.numpydoc_validation]
+checks = [
+    "all",   # report on all checks, except the below
+    "EX01",
+    "SA01",
+    "ES01",
+]
+exclude = [  # don't report on objects that match any of these regex
+    '\.undocumented_method$',
+    '\.__repr__$',
+    '\._.*$',  # Ignore anything that's private (e.g., starts with _)
+]
+override_SS05 = [  # override SS05 to allow docstrings starting with these words
+    '^Process ',
+    '^Assess ',
+    '^Access ',
+]
+
+[tool.setuptools_scm]
+version_file = "src/astrocolour/_version.py"
