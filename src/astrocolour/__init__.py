@@ -1,3 +1,5 @@
 """The AstroColour package for colour image creation."""
 
-from ._version import version as __version__
+from . import utils
+from ._version import __version__, __version_tuple__
+from .main import ColourImage
